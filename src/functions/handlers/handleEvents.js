@@ -1,6 +1,7 @@
 const fs = require("fs");
 const { validateHeaderValue } = require("http");
 
+//Reads .js files and executes them either once or continuously.
 module.exports = (client) => {
   client.handleEvents = async () => {
     const eventFolders = fs.readdirSync(`./src/events`);

@@ -1,5 +1,8 @@
 module.exports = {
   name: "interactionCreate",
+
+  //Creates new variables that retrieve and store data from client and interaction.
+  //Executes command if no error
   async execute(interaction, client) {
     if (interaction.isChatInputCommand()) {
       const { commands } = client;

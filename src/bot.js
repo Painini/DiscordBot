@@ -7,6 +7,7 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds,  GatewayIntentBi
 client.commands = new Collection();
 client.commandArray = [];
 
+//Reads .js files and imports them as functions to the client variable.
 const functionFolders = fs.readdirSync(`./src/functions`);
 for (const folder of functionFolders) {
   const functionFiles = fs
