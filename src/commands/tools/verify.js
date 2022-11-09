@@ -1,6 +1,4 @@
-//Receive user. Remove role from user. Add role to user. Confirmation message.
-
-const { SlashCommandBuilder} = require("discord.js");
+const { SlashCommandBuilder, PermissionsBitField} = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -14,17 +12,26 @@ module.exports = {
     ),
 
   async execute(interaction, client) {
+
+    
     const verifiedID = "1039503588839399434";
     const unverifiedID = "1039503650122379294";
 
     const user = interaction.options.getUser("target");
     const member = await interaction.guild.members.fetch(user.id).catch(console.error);
 
-    member.roles.remove(unverifiedID).catch(console.error);
-    member.roles.add(verifiedID).catch(console.error);
-
-    await interaction.reply({
-        content: `User verified`
-    });
+    if (interaction.member.permissions.has(PermissionsBitField.Flags.KickMembers))
+    {
+        member.roles.remove(unverifiedID).catch(console.error);
+        member.roles.add(verifiedID).catch(console.error);
+        await interaction.reply({
+            content: `User verified`
+        });
+    }
+    else
+        await interaction.reply({
+            content: "No Permissions",
+            ephemeral: true,
+        });
   },
 };

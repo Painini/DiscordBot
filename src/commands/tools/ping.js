@@ -12,5 +12,4 @@ module.exports = {
             content: newMessage
         });
     }
-        
 }
