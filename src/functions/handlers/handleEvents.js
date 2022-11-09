@@ -1,5 +1,5 @@
 const fs = require("fs");
-const { validateHeaderValue } = require("http");
+const { connection } = require("mongoose");
 
 //Reads .js files and executes them either once or continuously.
 module.exports = (client) => {
@@ -10,15 +10,31 @@ module.exports = (client) => {
         .readdirSync(`./src/events/${folder}`)
         .filter((file) => file.endsWith(".js"));
       switch (folder) {
-
         case "client":
           for (const file of eventFiles) {
-            const event = require(`../../events/${folder}/${file}`)
+            const event = require(`../../events/${folder}/${file}`);
             if (event.once)
-              client.once(event.name, (...args) => event.execute(...args, client));
+              client.once(event.name, (...args) =>
+                event.execute(...args, client)
+              );
             else
-              client.on(event.name, (...args) => event.execute(...args, client));
+              client.on(event.name, (...args) =>
+                event.execute(...args, client)
+              );
+          }
+          break;
 
+        case "mongo":
+          for (const file of eventFiles) {
+            const event = require(`../../events/${folder}/${file}`);
+            if (event.once)
+              connection.once(event.name, (...args) =>
+                event.execute(...args, client)
+              );
+            else
+              connection.on(event.name, (...args) =>
+                event.execute(...args, client)
+              );
           }
           break;
 
