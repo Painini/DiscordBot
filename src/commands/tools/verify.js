@@ -1,6 +1,7 @@
 const {SlashCommandBuilder, PermissionsBitField} = require("discord.js");
 
 module.exports = {
+    //Retrieves targeted user from command call
   data: new SlashCommandBuilder()
     .setName("verify")
     .setDescription("Verify the user")
@@ -20,6 +21,7 @@ module.exports = {
     const user = interaction.options.getUser("target");
     const member = await interaction.guild.members.fetch(user.id).catch(console.error);
 
+    //If caller has permissions, change roles on targeted user
     if (interaction.member.permissions.has(PermissionsBitField.Flags.KickMembers))
     {
         member.roles.remove(unverifiedID).catch(console.error);
