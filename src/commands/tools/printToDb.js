@@ -3,7 +3,7 @@ const { SlashCommandBuilder } = require("discord.js");
 const mongoose = require("mongoose");
 
 module.exports = {
-  data: new SlashCommandBuilder.setName("savemessage")
+  data: new SlashCommandBuilder().setName("savemessage")
     .setDescription("Save a message you write to a database")
     .addStringOption((option) => //Function may not exist
       option
@@ -21,17 +21,28 @@ module.exports = {
         messageProfile = await new Message({
             _id: mongoose.Types.ObjectId(),
             userId: member,
-            message: message,
-          });
+            userMessage: message,
+        });
 
-          await messageProfile.save().catch(console.error);
-          await interaction.reply({
+        await messageProfile.save().catch(console.error);
+        await interaction.reply({
             content: "Message saved",
-          });
-          console.log(messageProfile);
+            ephemeral: true,
+        });
+
+        console.log(messageProfile);
     }
     else {
-        //Continue here by watching tutorial on updating mongoose object
+            await messageProfile.updateOne({userMessage: message});
+            
+            await messageProfile.save().catch(console.error);
+            await interaction.reply({
+            content: "Message updated",
+            ephemeral: true,
+            
+        });
+        console.log(messageProfile);
     }
+    
   },
 };

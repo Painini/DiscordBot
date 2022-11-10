@@ -31,9 +31,12 @@ module.exports = {
         });
     }
     else
-        await interaction.reply({
-            content: "No Permissions",
-            ephemeral: true,
-        });
+    {
+      await interaction.reply({
+        content: "No Permissions",
+        ephemeral: true,
+      });
+    }
+       
   },
 };
