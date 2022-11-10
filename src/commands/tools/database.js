@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("database")
-    .setDescription("Returns information from a database"),
+    .setDescription("Stores server information in database"),
   async execute(interaction, client) {
     let guildProfile = await Guild.findOne({ guildId: interaction.guild.id });
     if (!guildProfile) {
