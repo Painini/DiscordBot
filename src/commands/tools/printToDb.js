@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 module.exports = {
   data: new SlashCommandBuilder().setName("savemessage")
     .setDescription("Save a message you write to a database")
-    .addStringOption((option) => //Function may not exist
+    .addStringOption((option) => //Function has no documentation
       option
         .setName("message")
         .setDescription("The message you want to save")
@@ -34,7 +34,7 @@ module.exports = {
     }
     else {
             await messageProfile.updateOne({userMessage: message});
-            
+
             await messageProfile.save().catch(console.error);
             await interaction.reply({
             content: "Message updated",

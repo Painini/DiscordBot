@@ -18,7 +18,7 @@ module.exports = {
             });
         }
         else {
-            const message = Message.userId;
+            const message = messageProfile.userMessage;
             await interaction.reply({
                 content: message,
             });
