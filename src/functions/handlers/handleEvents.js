@@ -1,7 +1,8 @@
 const fs = require("fs");
 const { connection } = require("mongoose");
 
-//Reads .js files and executes them either once or continuously.
+//Reads .js files in "client" folder and executes them either once or continuously.
+//Sends with it client and any args inputted
 module.exports = (client) => {
   client.handleEvents = async () => {
     const eventFolders = fs.readdirSync(`./src/events`);
@@ -22,8 +23,9 @@ module.exports = (client) => {
                 event.execute(...args, client)
               );
           }
-          break;
+          break; 
 
+//Reads .js files in "mongo" folder and executes them either once or continuously.        
         case "mongo":
           for (const file of eventFiles) {
             const event = require(`../../events/${folder}/${file}`);

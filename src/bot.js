@@ -9,7 +9,7 @@ const client = new Client({intents: [GatewayIntentBits.Guilds, GatewayIntentBits
 client.commands = new Collection();
 client.commandArray = [];
 
-//Reads .js files and imports them as functions to the client variable.
+//Reads .js files (commands) and imports them as functions to the client variable.
 const functionFolders = fs.readdirSync(`./src/functions`);
 for (const folder of functionFolders) {
   const functionFiles = fs
@@ -21,10 +21,10 @@ for (const folder of functionFolders) {
 
 client.handleEvents();
 client.handleCommands();
-client.login(token);
+client.login(token); //Bot goes online
 
 (async () => {
-  await connect(databaseToken).catch(console.error);
+  await connect(databaseToken).catch(console.error); //Asynchronously connects to database
 })();
 
-//Database login: discordbot, HsxYucIzzvrguZV9
+//Database user: discordbot, HsxYucIzzvrguZV9
