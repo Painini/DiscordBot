@@ -15,8 +15,8 @@ module.exports = {
   async execute(interaction, client) {
 
     
-    const verifiedID = "1039503588839399434";
-    const unverifiedID = "1039503650122379294";
+    const verifiedID = "969254922849746974";
+    const unverifiedID = "1004040256854708275";
 
     const user = interaction.options.getUser("target");
     const member = await interaction.guild.members.fetch(user.id).catch(console.error);
