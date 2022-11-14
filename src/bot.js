@@ -28,3 +28,7 @@ client.login(token); //Bot goes online
 })();
 
 //Database user: discordbot, HsxYucIzzvrguZV9
+
+//<script async src="https://cse.google.com/cse.js?cx=1411e1dd27c05486e">
+//</script>
+//<div class="gcse-search"></div>
