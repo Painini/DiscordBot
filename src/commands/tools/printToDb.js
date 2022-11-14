@@ -30,7 +30,6 @@ module.exports = {
             ephemeral: true,
         });
 
-        console.log(messageProfile);
     }
     else {
             await messageProfile.updateOne({userMessage: message});
@@ -41,8 +40,8 @@ module.exports = {
             ephemeral: true,
             
         });
-        console.log(messageProfile);
     }
     
   },
+  
 };
