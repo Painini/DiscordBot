@@ -10,7 +10,6 @@ module.exports = (client) => {
       const commandFiles = fs
         .readdirSync(`./src/commands/${folder}`)
         .filter((file) => file.endsWith(".js"));
-        console.log(commandFiles);
 
       const { commands, commandArray } = client;
       for (const file of commandFiles) {
