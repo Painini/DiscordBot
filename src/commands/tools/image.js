@@ -17,9 +17,9 @@ module.exports = {
         const url = searchResult.CurrentSearch().link;
         const customSearchEngineUrl = query.replaceAll(' ', '%20');
         const resultEmbed = new EmbedBuilder()
-        .setTitle(`Images`)
+        .setTitle(`Image`)
         .setURL(`https://cse.google.com/cse?cx=${process.env.cx}#gsc.q=${customSearchEngineUrl}`)
-        .setDescription(`Result ${searchResult.currentResult + 1} of ${searchResult.resultArray.length}`)
+        .setDescription(`Showing result for ${query}`)
         .addFields([
             {
                 name:  searchResult.CurrentSearch().title,
@@ -29,26 +29,8 @@ module.exports = {
         ])          
         .setImage(url);
 
-       // const row = new MessageActionRow()
-       // .addComponents(
-       //     new MessageButton()
-       //         .setCustomId('prev')
-       //         .setLabel('Previous')
-       //         .setStyle('PRIMARY'),
-       //     new MessageButton()
-       //         .setCustomId('next')
-       //         .setLabel('Next')
-       //         .setStyle('PRIMARY'),
-       //     new MessageButton()
-       //         .setLabel('View Original')
-       //         .setStyle('LINK')
-       //         .setURL(searchResult.CurrentSearch().image.contextLink),
-       //     
-       // );
-
         await interaction.reply({
             embeds: [resultEmbed], 
-            //components: [row], 
             fetchReply: true 
         });
     },
