@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
-
+//Reminder needs to be able to send reminders to other users as well
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("reminder")
