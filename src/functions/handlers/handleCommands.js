@@ -17,7 +17,8 @@ module.exports = (client) => {
         const command = require(`../../commands/${folder}/${file}`);
         commands.set(command.data.name, command);
         commandArray.push(command.data.toJSON());
-        console.log(chalk.yellow(`Command: ${command.data.name} has been passed`));
+        cmdstr = chalk.yellow("Command: ");
+        console.log(`${cmdstr}${command.data.name} has been passed`);
       }
     }
 
