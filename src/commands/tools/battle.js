@@ -42,11 +42,11 @@ module.exports = {
         "Weak",
         "Little",
       ];
-      const enemyTier = playerProfile.playerTier;
-      const enemyPower = Math.floor(
-        Math.random() * (playerPower / 0.95) + playerPower / 1.1
-      );
-
+      const playerTier = playerProfile.playerTier
+      const enemyTier = playerTier
+      const enemyPower = playerPower;
+      console.log(playerPower);
+      console.log(enemyPower);
       //Code that searches for enemy image
       let query = "";
       switch (enemyTier) {
@@ -95,7 +95,7 @@ module.exports = {
             inline: true,
           },
         ])
-        .setImage(url);
+        .setImage(searchResult.resultArray[Math.floor(Math.random() * 9)].link);
 
       //Code that replies with enemy Embed
       await interaction.reply({
@@ -105,28 +105,33 @@ module.exports = {
       });
 
       //Code that calculates winner
-      battleResult = Math.floor(
-        playerPower +
-          (Math.random() * playerPower) / 10 +
-          1 -
-          (enemyPower + (Math.random() * enemyPower) / 10 + 1)
+      battleResult = Math.floor(playerPower +(Math.random() * playerPower) / 10 + 1 - (enemyPower + (Math.random() * enemyPower) / 10 + 1)
       );
 
       if (battleResult > 1) {
         //Win
         //Code that gives player more power if they win
         //Code that updates player Tier if they have enough power
+        oldPlayerTier = playerTier;
         await playerProfile.updateOne({ playerPower: playerPower + 1 });
         if (playerPower == 20 || playerPower == 30 || playerPower == 50) {
           await playerProfile.updateOne({ playerTier: playerTier + 1 });
         }
         await playerProfile.save().catch(console.error);
 
+        const message = "";
+        if (!playerTier == oldPlayerTier) {
+            message = `You won against ${query}!\nYou gain Power\nYou have reached a new Tier!`
+        }
+        else
+        {
+            message = `You won against ${query}!\nYou gain Power`
+        }
+            
         setTimeout(function () {
           interaction.editReply({
             embeds: [enemyEmbed],
-            content: `You won against ${query}!\nYou gain Power`,
-            fetchReply: true,
+            content: message,
           });
         }, 4000);
       } 
