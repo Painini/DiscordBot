@@ -16,8 +16,8 @@ module.exports = {
                 _id: mongoose.Types.ObjectId(),
                 playerId: interaction.guild.id,
                 playerName: interaction.guild.name,
-                playerPower: "10",
-                playerTier: "0",
+                playerPower: 10,
+                playerTier: 0,
             });
 
             await playerProfile.save().catch(console.error);
@@ -52,7 +52,6 @@ module.exports = {
                     break;    
 
             }
-
             const searchResult = await imageSearch.ImageSearch(query);
             const url = searchResult.CurrentSearch().link;
             const customSearchEngineUrl = query.replaceAll(' ', '%20');
@@ -81,21 +80,35 @@ module.exports = {
             battleResult = Math.floor(((playerPower + Math.random() * playerPower/10) + 1) - ((enemyPower + Math.random() * enemyPower/10) + 1))
             if (battleResult > 1) {
                 //Win
+                //Code that gives player more power if they win
+                //Code that updates player Tier if they have enough power
+                await playerProfile.updateOne({playerPower: playerPower + 1}); //Might TypeError
+                if (playerPower == 10 || playerPower == 20)
+                {
+                    await playerProfile.updateOne({playerTier: playerTier + 1})
+                }
+                await playerProfile.save().catch(console.error);
+
+                setTimeout(function() {
+                    interaction.editReply({
+                        embeds: [enemyEmbed],
+                        content: `You won against ${query}!\nYou gain Power`,
+                        fetchReply: true 
+                    }),
+                    4000    
+                });
             }
             else if (battleResult < 1) {
                 //Loss
+                setTimeout(function() {
+                    interaction.editReply({
+                        embeds: [enemyEmbed],
+                        content: `You lost against ${query}!`
+                    })
+                    ,
+                    4000    
+                });
             }
-
-            setTimeout(function() {
-                
-                ,
-                3000    
-            });
-
-            //Code that gives player more power if they win
-
-            
-
         }
     }
 }

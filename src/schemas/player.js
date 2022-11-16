@@ -3,8 +3,8 @@ const playerSchema = new Schema({
     _id: Schema.Types.ObjectId,
     playerId: String,
     playerName: String,
-    playerPower: String,
-    playerTier: String,
+    playerPower: Number,
+    playerTier: Number,
 });
 
 module.exports = new model("Player", playerSchema, "players");
