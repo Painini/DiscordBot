@@ -26,8 +26,9 @@ module.exports = {
                 value: searchResult.CurrentSearch().displayLink,
                 inline: true,
             }
-        ])          
+        ])
         .setImage(url);
+        console.log(searchResult.resultArray);
 
         await interaction.reply({
             embeds: [resultEmbed], 
