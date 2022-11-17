@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const Weapon = require("../../schemas/weapon");
 const Player = require(require("path").resolve(
     __dirname,
     "../../schemas/player"
@@ -34,8 +35,27 @@ const Player = require(require("path").resolve(
             ])
             .setImage(playerProfile.playerImg);
 
+            const weaponEmbed = new EmbedBuilder();
+            let weaponProfile = await Weapon.findOne({playerId: member})
+            if (weaponProfile)
+            {
+              weaponEmbed
+              .setTitle('Your weapon')
+              .setURL(
+                `${weaponProfile.weaponImg}`
+              )
+              .addFields([
+                {
+                  name: `Power: ${weaponProfile.weaponPower}`,
+                  value: `${playerProfile.playerClass}`,
+                  inline: true, 
+                },
+              ])    
+              .setImage(weaponProfile.weaponImg)
+            }
+       
         await interaction.reply({
-            embeds: [playerEmbed],
+            embeds: [playerEmbed, weaponEmbed],
         })    
     }
 } 

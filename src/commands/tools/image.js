@@ -1,6 +1,6 @@
 require('dotenv').config();
 const {SlashCommandBuilder, EmbedBuilder} = require('discord.js');
-const imageSearch = require('../../search/imageSearch');
+const imageSearch = require('../../helperfunctions/imageSearch');
 
 module.exports = {
     data: new SlashCommandBuilder()

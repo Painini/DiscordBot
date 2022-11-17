@@ -3,7 +3,7 @@ const Player = require(require("path").resolve(
   __dirname,
   "../../schemas/player"
 ));
-const imageSearch = require("../../search/imageSearch");
+const imageSearch = require("../../helperfunctions/imageSearch");
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const mongoose = require("mongoose");
 module.exports = {
@@ -40,7 +40,7 @@ module.exports = {
             const currentPlayerName = interaction.user.username;
             const query = `Fantasy ${playerClass}`
             //const searchResult = await imageSearch.ImageSearch(query);
-            const searchResult = await imageSearch.ImageSearch(`Idle Wizard Voidmancer Portrait`);
+            const searchResult = await imageSearch.ImageSearch(query);
             const customSearchEngineUrl = query.replaceAll(" ", "%20");
             const image = searchResult.resultArray[Math.floor(Math.random() * 9)].link
             const playerEmbed = new EmbedBuilder()
