@@ -3,20 +3,22 @@ const { SlashCommandBuilder } = require("discord.js");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("reminder")
-    .setDescription("Set a reminder for yourself")
+    .setDescription("Set a reminder for a user")
     .addStringOption((option) =>
       option
         .setName("input")
-        .setDescription("<message>,<minutes until reminder>")
+        .setDescription("<message>,<minutes until reminder>,<target>")
         .setRequired(true)
     ),
 
   async execute(interaction, client) {
-    const member = interaction.member;
     const input = interaction.options.getString("input");
-    const i = input.indexOf(",");
-    const message = input.slice(0, i);
-    let time = input.slice(i + 1);
+    const inputs = input.split(',');
+    const message = inputs[0];
+    const time = inputs[1];
+    const target = inputs[2];
+    console.log(target);
+    const targetTrimmed = target.replaceAll(" ", "");
     await interaction.deferReply({
       fetchReply: true,
       ephemeral: true,
@@ -24,8 +26,8 @@ module.exports = {
 
     setTimeout(function () {
       interaction.editReply({
-        content: `${member} Reminder: "${message}" `,
+        content: `${targetTrimmed} Reminder: "${message}" `,
       });
-    }, (time * 60000));
+    }, (time * 60000)).catch(console.error);
   },
 };

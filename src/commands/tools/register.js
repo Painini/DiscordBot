@@ -6,7 +6,6 @@ const Player = require(require("path").resolve(
 const imageSearch = require("../../search/imageSearch");
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const mongoose = require("mongoose");
-
 module.exports = {
     data: new SlashCommandBuilder()
     .setName("register")
