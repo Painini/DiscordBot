@@ -45,7 +45,7 @@ module.exports = {
             const customSearchEngineUrl = query.replaceAll(" ", "%20");
             const image = searchResult.resultArray[Math.floor(Math.random() * 9)].link
             const playerEmbed = new EmbedBuilder()
-            .setTitle(`Your character`)
+            .setTitle(`Your new character!`)
             .setURL(
               `https://cse.google.com/cse?cx=${process.env.cx}#gsc.q=${customSearchEngineUrl}`
             )
