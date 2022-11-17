@@ -1,7 +1,7 @@
 require("dotenv").config();
-const Weapon = require("../../schemas/weapon");
+const Weapon = require("../schemas/weapon");
 
-const imageSearch = require("../../helperfunctions/imageSearch")
+const imageSearch = require("../modules/imageSearch")
 const mongoose = require("mongoose");
 
 

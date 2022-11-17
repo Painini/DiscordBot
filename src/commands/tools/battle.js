@@ -3,11 +3,10 @@ const Player = require(require("path").resolve(
   __dirname,
   "../../schemas/player"
 ));
-const createWeapon = require("../../helperfunctions/createWeapon");
-
-const imageSearch = require("../../helperfunctions/imageSearch");
+const createWeapon = require("../../modules/createWeapon");
+const imageSearch = require("../../modules/imageSearch");
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-
+const chalk = require("chalk");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("battle")
@@ -91,7 +90,8 @@ module.exports = {
         content: "You are battling!!!",
         fetchReply: true,
       });
-
+      console.log(chalk.blue(`Battle command used by: ${interaction.user.username}`));
+      
       //Code that calculates winner
       battleResult = Math.floor(Math.random() * 10);
       if (battleResult > 4) {
@@ -106,12 +106,13 @@ module.exports = {
         await playerProfile.save().catch(console.error);
         let message = "";
 
+
         if (playerPower == 20) {
           weaponProfile = createWeapon(playerProfile.playerClass, playerProfile.profileId, 10) //Go into profile command and create embed for the weapon if it exists.
           message = `You won against ${query}!\nYou gain Power\nYou have reached a new Tier!\n\n You have gained a new weapon!!!! Check your profile to see it!`
+          
         }
-
-        if (!playerTier == oldPlayerTier) {
+        else if (!playerTier == oldPlayerTier) {
             message = `You won against ${query}!\nYou gain Power\nYou have reached a new Tier!`
         }
         else

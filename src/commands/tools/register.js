@@ -3,7 +3,7 @@ const Player = require(require("path").resolve(
   __dirname,
   "../../schemas/player"
 ));
-const imageSearch = require("../../helperfunctions/imageSearch");
+const imageSearch = require("../../modules/imageSearch");
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const mongoose = require("mongoose");
 module.exports = {
