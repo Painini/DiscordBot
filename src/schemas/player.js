@@ -5,6 +5,8 @@ const playerSchema = new Schema({
     playerName: String,
     playerPower: Number,
     playerTier: Number,
+    playerClass: String,
+    playerImg: String,
 });
 
 module.exports = new model("Player", playerSchema, "players");

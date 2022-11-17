@@ -5,7 +5,6 @@ const Player = require(require("path").resolve(
 ));
 const imageSearch = require("../../search/imageSearch");
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const mongoose = require("mongoose");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -18,17 +17,8 @@ module.exports = {
       .catch(console.error);
     let playerProfile = await Player.findOne({ playerId: member });
     if (!playerProfile) {
-      playerProfile = await new Player({
-        _id: mongoose.Types.ObjectId(),
-        playerId: member,
-        playerName: interaction.user.name,
-        playerPower: 10,
-        playerTier: 0,
-      });
-
-      await playerProfile.save().catch(console.error);
       await interaction.reply({
-        content: `No character was found, a new one has been created for you!\nHappy battling!`,
+        content: `No character was found! Please register one with the "/register" command!`,
       });
     } else {
       playerPower = playerProfile.playerPower;
@@ -75,7 +65,6 @@ module.exports = {
       }
 
       const searchResult = await imageSearch.ImageSearch(query);
-      const url = searchResult.CurrentSearch().link;
       const customSearchEngineUrl = query.replaceAll(" ", "%20");
 
       //Embed that shows enemy image
