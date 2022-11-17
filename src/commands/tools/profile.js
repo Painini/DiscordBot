@@ -43,8 +43,13 @@ module.exports = {
       });
     }
     else {
+      let equipment = "";
+      if (playerProfile.playerClass == "Warrior")
+        equipment = "Weapon"
+      else if (playerProfile.playerClass == "Mage")
+        equipment = "Tome"
       const weaponEmbed = new EmbedBuilder()
-      .setTitle('Your weapon')
+      .setTitle(`Your ${equipment}`)
       .setURL(
       `${weaponProfile.weaponImg}`
       )

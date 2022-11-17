@@ -99,18 +99,17 @@ module.exports = {
         //Code that gives player more power if they win
         //Code that updates player Tier if they have enough power
         const oldPlayerTier = playerTier;
-        await playerProfile.updateOne({ playerPower: playerPower + 1 });
+        playerPower++;
+        await playerProfile.updateOne({ playerPower: playerPower });
         if (playerPower == 20 || playerPower == 40 || playerPower == 50) {
           await playerProfile.updateOne({ playerTier: playerTier + 1 });
         }
         await playerProfile.save().catch(console.error);
         let message = "";
 
-
-        if (playerPower == 20) {
-          weaponProfile = createWeapon(playerProfile.playerClass, playerProfile.profileId, 10) //Go into profile command and create embed for the weapon if it exists.
-          message = `You won against ${query}!\nYou gain Power\nYou have reached a new Tier!\n\n You have gained a new weapon!!!! Check your profile to see it!`
-          
+        if (playerPower == "20") {
+          weaponProfile = await createWeapon.createWeapon(playerProfile.playerClass, playerProfile.playerId, 10)
+          message = `You won against ${query}!\nYou gain Power\nYou have reached a new Tier!\n\nYou have gained new equipment!!!! Check your profile to see it!`
         }
         else if (!playerTier == oldPlayerTier) {
             message = `You won against ${query}!\nYou gain Power\nYou have reached a new Tier!`
