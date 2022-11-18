@@ -2,6 +2,7 @@ const Guild = require(require('path').resolve(__dirname, "../../schemas/guild"))
 const { SlashCommandBuilder } = require("discord.js");
 const mongoose = require("mongoose");
 
+//Saves info about server to database
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("database")

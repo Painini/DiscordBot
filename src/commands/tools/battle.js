@@ -4,6 +4,7 @@ const Player = require(require("path").resolve(
   "../../schemas/player"
 ));
 const createWeapon = require("../../modules/createWeapon");
+const Weapon = require("../../schemas/weapon");
 const imageSearch = require("../../modules/imageSearch");
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const chalk = require("chalk");
@@ -22,7 +23,12 @@ module.exports = {
         content: `No character was found! Please register one with the "/register" command!`,
       });
     } else {
-      playerPower = playerProfile.playerPower //This needs to be affected depending on if the player has a weapon
+      let weaponProfile = await Weapon.findOne({ playerId: member })
+      if (!weaponProfile)
+        playerPower = playerProfile.playerPower;
+      else
+        playerPower = parseInt(playerProfile.playerPower) + parseInt(weaponProfile.weaponPower);
+  
       //Code that builds enemy
       const enemyImageKeywords = [
         "Scary",
@@ -100,14 +106,14 @@ module.exports = {
         //Code that updates player Tier if they have enough power
         const oldPlayerTier = playerTier;
         playerPower++;
-        await playerProfile.updateOne({ playerPower: playerPower });
+        await playerProfile.updateOne({ playerPower: playerProfile.playerPower++ });
         if (playerPower == 20 || playerPower == 40 || playerPower == 50) {
           await playerProfile.updateOne({ playerTier: playerTier + 1 });
         }
         await playerProfile.save().catch(console.error);
         let message = "";
 
-        if (playerPower == "20") {
+        if (playerProfile.playerPower == "20") {
           weaponProfile = await createWeapon.createWeapon(playerProfile.playerClass, playerProfile.playerId, 10)
           message = `You won against ${query}!\nYou gain Power\nYou have reached a new Tier!\n\nYou have gained new equipment!!!! Check your profile to see it!`
         }
