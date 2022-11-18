@@ -33,6 +33,7 @@ module.exports = {
             await interaction.reply({
                 content: "Invalid Class Number!"
             })
+            return;
         }
         const member = await interaction.guild.members.fetch(interaction.user.id).catch(console.error);
         let playerProfile = await Player.findOne({ playerId: member });
@@ -74,8 +75,8 @@ module.exports = {
         }
         else {
             await interaction.reply({
-                content: `Character Already exists!`
-            })
+                content: `Character already exists!`,
+            });
         }
     }
 }        

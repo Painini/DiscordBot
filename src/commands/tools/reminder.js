@@ -28,6 +28,6 @@ module.exports = {
       interaction.editReply({
         content: `${targetTrimmed} Reminder: "${message}" `,
       });
-    }, (time * 60000)).catch(console.error);
+    }, (time * 60000))
   },
 };

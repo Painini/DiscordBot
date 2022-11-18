@@ -28,8 +28,6 @@ module.exports = {
             }
         ])
         .setImage(url);
-        console.log(searchResult.resultArray);
-
         await interaction.reply({
             embeds: [resultEmbed], 
             fetchReply: true 
