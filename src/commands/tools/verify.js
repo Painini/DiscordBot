@@ -1,7 +1,7 @@
-const {SlashCommandBuilder, PermissionsBitField} = require("discord.js");
+const { SlashCommandBuilder, PermissionsBitField } = require("discord.js");
 
 module.exports = {
-    //Retrieves targeted user from command call
+  //Retrieves targeted user from command call
   data: new SlashCommandBuilder()
     .setName("verify")
     .setDescription("Verify the user")
@@ -13,30 +13,17 @@ module.exports = {
     ),
 
   async execute(interaction, client) {
-
-    
     const verifiedID = "969254922849746974";
     const unverifiedID = "1004040256854708275";
 
     const user = interaction.options.getUser("target");
-    const member = await interaction.guild.members.fetch(user.id).catch(console.error);
-
-    //If caller has permissions, change roles on targeted user
-    if (interaction.member.permissions.has(PermissionsBitField.Flags.KickMembers))
-    {
-        member.roles.remove(unverifiedID).catch(console.error);
-        member.roles.add(verifiedID).catch(console.error);
-        await interaction.reply({
-            content: `User verified`
-        });
-    }
-    else
-    {
-      await interaction.reply({
-        content: "No Permissions",
-        ephemeral: true,
-      });
-    }
-       
+    const member = await interaction.guild.members
+      .fetch(user.id)
+      .catch(console.error);
+    member.roles.remove(unverifiedID).catch(console.error);
+    member.roles.add(verifiedID).catch(console.error);
+    await interaction.reply({
+      content: `User verified`,
+    });
   },
 };
