@@ -6,7 +6,7 @@ const Player = require(require("path").resolve(
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("profileimage")
+    .setName("characterimage")
     .setDescription("Set your character's image!")
     .addStringOption((option) =>
       option.setName("input")
@@ -16,8 +16,11 @@ module.exports = {
 
   async execute(interaction, client) {
     const url = interaction.options.getString("input")
+    const member = await interaction.guild.members
+      .fetch(interaction.user.id)
+      .catch(console.error);
 
-    let playerProfile = await Player.findOne({playerId: interaction.user.id})
+    let playerProfile = await Player.findOne({playerId: member})
     if (!playerProfile)
     {
         await interaction.reply({

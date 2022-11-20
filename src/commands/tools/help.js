@@ -13,6 +13,7 @@ module.exports = {
             "/activity - Find out what you're currently doing.\n" +
             "/register - Create a character to be used in battles.\n" +
             "/profile - See your character and their stats.\n" +
+            "/characterimage - Set your character's image.\n" +
             "/battle - Fight an enemy.\n" + 
             "/grow - Grow a pretty flower.\n" + 
             "**| Administrative Commands |**\n" +
