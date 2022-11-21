@@ -19,7 +19,6 @@ module.exports = {
             "**| Administrative Commands |**\n" +
             "/verify - Let a new user into the main server.\n" +
             "/database - Store info about the server.\n",
-            ephemeral: true,
         })
     }
 }
