@@ -3,7 +3,10 @@ const { token, databaseToken } = process.env;
 const { connect } = require("mongoose");
 const { Client, Collection, GatewayIntentBits } = require("discord.js");
 const fs = require("fs");
-
+const {givePrompt} = require(require("path").resolve(
+  __dirname,
+  "modules/input"
+));
 
 
 const client = new Client({intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildPresences],
@@ -34,8 +37,5 @@ client.login(token); //Bot goes online
 //Database user: discordbot, HsxYucIzzvrguZV9
 
 (async () => {
-    const {givePrompt} = await require(require("path").resolve(
-      __dirname,
-      "modules/input"
-    ));
+    await givePrompt();
 })();

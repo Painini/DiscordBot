@@ -1,19 +1,16 @@
 const prompt = require("prompt");
 const chalk = require("chalk");
-
-const givePrompt = () =>{
-  let promptGiven = false;
-  prompt.start();
-  promptGiven = true;
+async function givePrompt() {
+  prompt.on();
   prompt.get(["input"], function (err, result) {
     if (err) {
       return onErr(err);
     }
-    console.log(`Command-line input received: ${result.input}`);
+    return result.input;
   });
   function onErr(err) {
     console.log(err);
   }
 }
 
-exports.givePrompt = givePrompt();
+module.exports = {givePrompt}
