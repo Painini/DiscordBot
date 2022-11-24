@@ -18,7 +18,7 @@ module.exports = (client) => {
         commands.set(command.data.name, command);
         commandArray.push(command.data.toJSON());
         cmdstr = chalk.yellow("Command: ");
-        console.log(`${cmdstr}${command.data.name} has been passed`);
+        console.log(`${cmdstr}${command.data.name} has been passed into commandArray`);
       }
     }
 
@@ -26,13 +26,13 @@ module.exports = (client) => {
     const guildId = `943975833574457364`;
     const rest = new REST({ version: "9" }).setToken(process.env.token);
     try {
-      console.log("Started refreshing application (/) commands.");
+      console.log("Started refreshing application (/) commands for client.");
 
       await rest.put(Routes.applicationGuildCommands(clientId, guildId), {
         body: client.commandArray,
       });
 
-      console.log("Successfully reloaded application (/) commands.");
+      console.log("Successfully refreshed application (/) commands for client.");
     } catch (error) {
       console.error(error);
     }

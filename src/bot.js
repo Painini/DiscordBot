@@ -4,6 +4,8 @@ const { connect } = require("mongoose");
 const { Client, Collection, GatewayIntentBits } = require("discord.js");
 const fs = require("fs");
 
+
+
 const client = new Client({intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildPresences],
 });
 client.commands = new Collection();
@@ -21,6 +23,8 @@ for (const folder of functionFolders) {
 
 client.handleEvents();
 client.handleCommands();
+//client.login must automatically run any export named "ready". The ready command is
+//otherwise never called in the code
 client.login(token); //Bot goes online
 
 (async () => {
@@ -28,3 +32,10 @@ client.login(token); //Bot goes online
 })();
 
 //Database user: discordbot, HsxYucIzzvrguZV9
+
+(async () => {
+    const {givePrompt} = await require(require("path").resolve(
+      __dirname,
+      "modules/input"
+    ));
+})();

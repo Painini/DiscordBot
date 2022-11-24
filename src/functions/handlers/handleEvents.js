@@ -11,17 +11,20 @@ module.exports = (client) => {
         .readdirSync(`./src/events/${folder}`)
         .filter((file) => file.endsWith(".js"));
       switch (folder) {
-        case "client":
+        case "client": 
           for (const file of eventFiles) {
             const event = require(`../../events/${folder}/${file}`);
-            if (event.once)
+            if (event.once) {
               client.once(event.name, (...args) =>
                 event.execute(...args, client)
               );
-            else
+            }
+            else {
               client.on(event.name, (...args) =>
                 event.execute(...args, client)
               );
+            }
+            console.log(`Event: ${event.name} is executing.`)
           }
           break; 
 
@@ -39,7 +42,7 @@ module.exports = (client) => {
               );
           }
           break;
-
+          
         default:
           break;
       }
