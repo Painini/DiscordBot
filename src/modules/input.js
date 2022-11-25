@@ -1,26 +1,15 @@
 const prompt = require("prompt");
-const ps = require("prompt-sync")
-const promptSync = ps();
 const chalk = require("chalk");
 
 function givePromptAsync() {
-    prompt.get(["pooka"], function (err, result) {
-
-      return true;
-    })
-  }
-
-function givePromptSync() {
-  console.log("You are now in Pooka mode. Type .. to exit Pooka mode")
-  const run = true
-  while (run) { 
-    let input = promptSync(chalk.magentaBright("Pooka: "));
-    if (input == "..")
-    {
-      return false;
-    }
-    //Code for discord bot here
-  }
+    prompt.get([chalk.magentaBright("pooka")], function (err, result) {
+      return result.pooka;
+  })
 }
 
-module.exports = {givePromptSync, givePromptAsync}
+module.exports = {givePromptAsync}
+
+//Have an async function read a message from the terminal
+//Save input from the terminal, send it to the bot 
+//Have an interval every ten seconds or so that closes the async function
+//AND runs a new async function that can take a new prompt input

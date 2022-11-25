@@ -1,15 +1,12 @@
-const {givePromptSync, givePromptAsync} = require(require("path").resolve(
-    __dirname,
-    "./input"
-  ));
+const { givePromptAsync } = require(require("path").resolve(
+  __dirname,
+  "./input"
+));
 
- function ContTakeInput() {
-    let useSyncMethod = false;
-        if (!useSyncMethod)
-            useSyncMethod = givePromptAsync();
-        if (useSyncMethod)
-            useSyncMethod = givePromptSync();
+async function ContTakeInput() {
+    while (true) {
+        await givePromptAsync(); // Code runs once before exiting for loop
     }
+}
 
-module.exports = {ContTakeInput}
-  
+module.exports = { ContTakeInput };
