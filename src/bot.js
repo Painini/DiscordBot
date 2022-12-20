@@ -36,6 +36,6 @@ client.login(token); //Bot goes online
 
 //Database user: discordbot, HsxYucIzzvrguZV9
 
-(async () => {
+/*(async () => {
   ContTakeInput();
-})();
+})();*/
